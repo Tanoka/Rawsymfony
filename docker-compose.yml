@@ -1,0 +1,26 @@
+version: '2.2'
+services:
+  front:
+    image: serverphp7
+    container_name: symfony-test
+    init: true
+    expose:
+      - "80"
+    ports:
+      - "81:80"
+      - "2228:22"
+    volumes:
+      - .:/var/www/symfony-test
+    extra_hosts:
+      - "symfony.testing.local:172.18.10.10"
+    networks:
+        testing:
+            ipv4_address: 172.30.10.10
+
+networks:
+    testing:
+        driver: bridge
+        ipam:
+            config:
+               - subnet: 172.30.10.0/16
+
